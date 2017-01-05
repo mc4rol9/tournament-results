@@ -1,5 +1,5 @@
 # Tournament Results
-The achievement of this project was to write a Python module using the PostgreSQL database to keep track of players and matches in a game tournament that uses the Swiss Pairings System in each round. That means that players are not eliminated and each player should be paired with another player with the same number of wins, or as close as possible.
+The goal of this project was to write a Python module using the PostgreSQL database to keep track of players and matches in a game tournament that uses the Swiss Pairings System in each round. That means that players are not eliminated and each player should be paired with another player with the same number of wins, or as close as possible.
 
 I defined the database schema and wrote the code to use it inside the project template that was given.
 
