@@ -4,7 +4,6 @@
 #
 
 import psycopg2  # PostgreSQL for Python
-import bleach  # whitelist-based HTML sanitizing library
 
 
 def connect(database_name="tournament"):
@@ -21,7 +20,7 @@ def deleteMatches():
     """Remove all the match records from the database."""
     db, cursor = connect()
 
-    query = "TRUNCATE FROM matches CASCADE;"
+    query = "TRUNCATE matches CASCADE;"
     cursor.execute(query)
 
     db.commit()
@@ -32,7 +31,7 @@ def deletePlayers():
     """Remove all the player records from the database."""
     db, cursor = connect()
 
-    query = "TRUNCATE FROM players CASCADE;"
+    query = "TRUNCATE players CASCADE;"
     cursor.execute(query)
 
     db.commit()
