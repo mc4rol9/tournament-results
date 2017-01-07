@@ -25,10 +25,8 @@ Also download this project to your local machine.
 - `vagrant ssh` to start Ubuntu Machine
 - `cd /vagrant/tournament` to get inside project directory
 
-2. Create the database for the project:
+2. Create and connect to database:
 - `psql` to start PostgreSQL
-- `create database tournament;` to create a database for the project
-- `\c tournament` to connect to the project database
 - `\i tournament.sql` to run the sql script that creates all the tables and views
 - `\d` to see the elements creates
 
