@@ -7,10 +7,10 @@
 -- these lines here. 
 
 
--- everytime this script runs, all tables, views and database will be dropped and created again
-DROP TABLE IF EXISTS players CASCADE;
-DROP TABLE IF EXISTS matches CASCADE;
-DROP VIEW IF EXISTS standings CASCADE;
+-- everytime this script runs, database will be created again
+DROP DATABASE IF EXISTS tournament;
+CREATE DATABASE tournament;
+\c tournament
 
 -- create tables
 CREATE TABLE players ( 
