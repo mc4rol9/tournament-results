@@ -19,8 +19,11 @@ def connect(database_name="tournament"):
 
 def deleteMatches():
     """Remove all the match records from the database."""
-    db, cursor = connect() 
-    c.execute("DELETE FROM matches;")
+    db, cursor = connect()
+
+    query = "TRUNCATE FROM matches CASCADE;"
+    cursor.execute(query)
+
     db.commit()
     db.close()
 
@@ -28,7 +31,10 @@ def deleteMatches():
 def deletePlayers():
     """Remove all the player records from the database."""
     db, cursor = connect()
-    c.execute("DELETE FROM players;")
+
+    query = "TRUNCATE FROM players CASCADE;"
+    cursor.execute(query)
+
     db.commit()
     db.close()
 
@@ -36,8 +42,11 @@ def deletePlayers():
 def countPlayers():
     """Returns the number of players currently registered."""
     db, cursor = connect()
-    c.execute("SELECT count(*) from players")
-    num = c.fetchone()
+
+    query = "SELECT count(*) FROM players"
+    cursor.execute(query)
+    num = cursor.fetchone()
+
     db.close()
     return num[0]
 
@@ -52,8 +61,11 @@ def registerPlayer(name):
       name: the player's full name (need not be unique).
     """
     db, cursor = connect()
-    c.execute("INSERT INTO players (name) VALUES (%s);",
-              (bleach.clean(name),))
+
+    query = "INSERT INTO players (name) VALUES (%s);"
+    parameter = (name,)
+    cursor.execute(query, parameter)
+
     db.commit()
     db.close()
 
@@ -72,8 +84,11 @@ def playerStandings():
         matches: the number of matches the player has played
     """
     db, cursor = connect()
-    c.execute("SELECT * FROM standings;")
-    standings = c.fetchall()
+
+    query = "SELECT * FROM standings;"
+    cursor.execute(query)
+    standings = cursor.fetchall()
+
     db.close()
     return standings
 
@@ -86,8 +101,11 @@ def reportMatch(winner, loser):
       loser:  the id number of the player who lost
     """
     db, cursor = connect()
-    c.execute("INSERT INTO matches (winner, loser) VALUES (%s,%s);",
-              (bleach.clean(winner), (loser),))
+
+    query = "INSERT INTO matches (winner,loser) VALUES (%s, %s);"
+    parameter = (winner, loser,)
+    cursor.execute(query, parameter)
+
     db.commit()
     db.close()
 
@@ -108,6 +126,7 @@ def swissPairings():
         name2: the second player's name
     """
     pairings = playerStandings()
+
     return [(pairings[i-1][0], pairings[i-1][1],
             pairings[i][0], pairings[i][1])
             for i in range(1, len(pairings), 2)]
